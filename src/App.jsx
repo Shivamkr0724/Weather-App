@@ -12,7 +12,7 @@ import fog from "./assets/fog.png";
 import TodayHighlight from "./components/TodayHighlight";
 import WeekWeather from "./components/WeekWeather";
 import moon from "./assets/moon.png"
-import home from "./assets/home.gif"
+import home from "/home.gif"
 
 
 

@@ -178,17 +178,19 @@ const sunset = new Date(weatherData.daily.sunset[0])
       />
     </div>
   </div>
-   {!weather && !loading ? (
-        <div className="flex flex-col max-w-[130] items-center justify-center">
-          <img
-            src={home}
-            alt="Loading weather..."
-            className="w-130 h-65  mt-4"
-          />
-          <h1 className="text-center">Discover the weather around you — live, accurate, and beautiful.</h1>
-          </div>)
-              : null 
-   }
+ {!weather && !loading ? (
+  <div className="flex flex-col max-w-[130] items-center justify-center">
+    <img
+      src={home}
+      alt="Loading weather..."
+      className="w-130 h-65 mt-4"
+    />
+    <h1 className="text-center">
+      Discover the weather around you — live, accurate, and beautiful.
+    </h1>
+  </div>
+) : null}
+
 
   {/* ⚙️ Loader/Error */}
   {loading && <p className="text-gray-400 mt-6 text-center">Fetching weather...</p>}

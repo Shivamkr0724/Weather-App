@@ -12,7 +12,7 @@ import fog from "./assets/fog.png";
 import TodayHighlight from "./components/TodayHighlight";
 import WeekWeather from "./components/WeekWeather";
 import moon from "./assets/moon.png"
-import home from "/home.png"
+// import home from "/home.png"
 
 
 
@@ -178,8 +178,8 @@ const sunset = new Date(weatherData.daily.sunset[0])
       />
     </div>
   </div>
- {!weather && !loading ? (
-  <div className="flex flex-col max-w-[130] items-center justify-center">
+ {/* {!weather && !loading ? (
+  <div className="flex flex-col items-center justify-center">
     <img
       src={home}
       alt="Loading weather..."
@@ -189,7 +189,7 @@ const sunset = new Date(weatherData.daily.sunset[0])
       Discover the weather around you — live, accurate, and beautiful.
     </h1>
   </div>
-) : null}
+) : null} */}
 
 
   {/* ⚙️ Loader/Error */}

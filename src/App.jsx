@@ -11,27 +11,18 @@ import thunder from "./assets/thunder.png";
 import fog from "./assets/fog.png";
 import TodayHighlight from "./components/TodayHighlight";
 import WeekWeather from "./components/WeekWeather";
-
-const hourlyData = [
-  { time: "1PM", temp: 20, icon: partlyCloudy },
-  { time: "2PM", temp: 21, icon: partlyCloudy },
-  { time: "3PM", temp: 20, icon: sunny },
-  { time: "4PM", temp: 19, icon: partlyCloudy },
-  { time: "5PM", temp: 18, icon: cloudy },
-  { time: "6PM", temp: 18, icon: cloudy },
-  { time: "7PM", temp: 15, icon: fog }, // or moon if you have that icon
-];
+import moon from "./assets/moon.png"
+import home from "./assets/home.gif"
 
 
-const tomorrowData = {
-  description: "Thunder storm",
-  temp: 14,
-  icon: "/weather/thunder.png",
-};
+
 
 const getWeatherImage = (code) => {
-  if (code === 0) return sunny;
-  if ([1, 2].includes(code)) return partlyCloudy;
+  const hour = new Date().getHours();
+  const isNight = hour >= 19 || hour < 6; // 🌙 between 7 PM and 6 AM
+
+  if (code === 0) return isNight ? moon : sunny;
+  if ([1, 2].includes(code)) return isNight ? moon : partlyCloudy;
   if (code === 3) return cloudy;
   if ([45, 48].includes(code)) return fog;
   if (code >= 51 && code <= 57) return drizzle;
@@ -41,6 +32,7 @@ const getWeatherImage = (code) => {
   if (code >= 95 && code <= 99) return thunder;
   return cloudy; // default fallback
 };
+
 
 
 const getWeatherText = (code) => {
@@ -87,10 +79,6 @@ const App = () => {
 
       const { latitude, longitude, name, country } = geoData.results[0];
 
-      // Step 2: get weather data
-      // const weatherRes = await fetch(
-      //  `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,uv_index_max,relative_humidity_2m_max&timezone=auto`
-      // );
       const weatherRes = await fetch(
   `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true&hourly=temperature_2m,weathercode&daily=temperature_2m_max,temperature_2m_min,weathercode,sunrise,sunset,precipitation_probability_max,uv_index_max,relative_humidity_2m_max&timezone=auto`
 );
@@ -190,6 +178,17 @@ const sunset = new Date(weatherData.daily.sunset[0])
       />
     </div>
   </div>
+   {!weather && !loading ? (
+        <div className="flex flex-col max-w-[130] items-center justify-center">
+          <img
+            src={home}
+            alt="Loading weather..."
+            className="w-130 h-65  mt-4"
+          />
+          <h1 className="text-center">Discover the weather around you — live, accurate, and beautiful.</h1>
+          </div>)
+              : null 
+   }
 
   {/* ⚙️ Loader/Error */}
   {loading && <p className="text-gray-400 mt-6 text-center">Fetching weather...</p>}

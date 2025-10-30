@@ -12,7 +12,7 @@ import fog from "./assets/fog.png";
 import TodayHighlight from "./components/TodayHighlight";
 import WeekWeather from "./components/WeekWeather";
 import moon from "./assets/moon.png"
-import home from "/home.gif"
+import home from "/home.png"
 
 
 
@@ -183,7 +183,7 @@ const sunset = new Date(weatherData.daily.sunset[0])
     <img
       src={home}
       alt="Loading weather..."
-      className="w-130 h-65 mt-4"
+      className="w-90 h-70 mt-4"
     />
     <h1 className="text-center">
       Discover the weather around you — live, accurate, and beautiful.
